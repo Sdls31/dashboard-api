@@ -14,7 +14,6 @@ class Client(models.Model):
         return self.name 
     
 
-
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=40)
@@ -28,9 +27,19 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+    reception = 'Recepcion'
+    stored = 'Almacenado'
+    packaging = 'Envasado'
+    packaged = 'Empaquetado'
+    quality = 'Calidad'
+    distribution = 'Distribucion'
+
+    
     id = models.AutoField(primary_key=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, default=1)
-    products = models.ManyToManyField(Product)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
+    products = models.ForeignKey(Product,  on_delete=models.CASCADE, null=True)
+    quantity = models.PositiveIntegerField(default=1)
+    details = models.CharField(max_length=15, choices=[(reception , 'Recepcion'), (stored , 'Almacenado'), (packaging , 'Envasado'), (packaged ,'Empaquetado'), ( quality , 'Calidad'), ( distribution , 'Distribucion')], default="Recepcion")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
