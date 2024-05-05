@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+    <title>Productos</title>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Productos</h1>
+    <div class="grid-products">
+        {% for product in products %}
+        <div style="text-align: center; margin: 20px ;padding:20px;"> 
+            <div style="font-weight: bold;">{{ product.name }}</div> 
+            <div>$ {{ product.price }}</div> 
+            {% if product.image_url %}
+            <div style="width: fit-content; margin: auto;"> 
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" style="width: 10rem; height: auto;">
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
