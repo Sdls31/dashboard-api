@@ -24,6 +24,13 @@ def list_clients(request):
     clients = Client.objects.all()
     return JsonResponse({'products': list(clients.values())})
 
+def list_users(request):
+    users = User.objects.all()
+    # orders = Order.objects.all()
+    # data = Order.objects.get(pk=1)
+    # client_name = Client.objects.get(pk = data.client_id)
+    return  JsonResponse({'orders': list(users.values())})
+
 @csrf_exempt
 def create_product(request):
     if request.method == 'POST':
