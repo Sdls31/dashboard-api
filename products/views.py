@@ -65,7 +65,7 @@ def create_order(request):
         details = request.POST.get('details') 
         address = request.POST.get('address')
         try:
-            client = Client.objects.get(id=int(client_id))
+            client = Client.objects.get(id=client_id)
         except Client.DoesNotExist:
             return JsonResponse({'error': 'El cliente con el ID proporcionado no existe'})
         try:
