@@ -9,5 +9,6 @@ urlpatterns = [
     path('saveproduct/', views.create_product, name='savepr'),
     path('saveclient/', views.create_client, name='savecl'),
     path('saveorder/', views.create_order, name='saveor'),
-    path('saveuser/', views.create_user, name='saveus')
+    path('saveuser/', views.create_user, name='saveus'),
+    path('login/', views.login, name='login')
 ]

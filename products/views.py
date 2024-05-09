@@ -32,6 +32,21 @@ def list_users(request):
     return  JsonResponse({'orders': list(users.values())})
 
 @csrf_exempt
+def login(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data['username']
+        try:
+            user = User.objects.get(username=name)
+            return  JsonResponse({'orders': user.staff})
+        except: 
+            return JsonResponse({'message', 'No existe ese usuario'})
+    # orders = Order.objects.all()
+    # data = Order.objects.get(pk=1)
+    # client_name = Client.objects.get(pk = data.client_id)
+
+
+@csrf_exempt
 def create_product(request):
     if request.method == 'POST':
         try:
@@ -103,4 +118,9 @@ def create_user(request):
             return JsonResponse({'error': str(e)})
     else:
         return JsonResponse({'error': 'Solo se aceptan solicitudes POST'})
+    
+
+def check_User(request):
+    if request.method == 'POST':
+        data = json.loads()
         
