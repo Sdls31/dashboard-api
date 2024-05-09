@@ -63,6 +63,7 @@ def create_order(request):
         product_id = request.POST.get('product_id') 
         quantity = request.POST.get('quantity') 
         details = request.POST.get('details') 
+        address = request.POST.get('address')
         try:
             client = Client.objects.get(id=client_id)
 
@@ -73,7 +74,7 @@ def create_order(request):
         except Product.DoesNotExist:
             return JsonResponse({'error': 'El producto con el ID proporcionado no existe'})
 
-        order = Order(client=client, products=product, quantity=quantity, details=details)
+        order = Order(client=client, products=product, quantity=quantity, details=details, address=address)
         order.save()
         return JsonResponse({'message': 'La orden ha sido creada'})
     else:
