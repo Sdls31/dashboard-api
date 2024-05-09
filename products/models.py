@@ -40,6 +40,7 @@ class Order(models.Model):
     products = models.ForeignKey(Product,  on_delete=models.CASCADE, null=True)
     quantity = models.PositiveIntegerField(default=1)
     details = models.CharField(max_length=15, choices=[(reception , 'Recepcion'), (stored , 'Almacenado'), (packaging , 'Envasado'), (packaged ,'Empaquetado'), ( quality , 'Calidad'), ( distribution , 'Distribucion')], default="Recepcion")
+    address = models.CharField(max_length=50, default="Mexico")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
