@@ -146,7 +146,7 @@ def delete_order(request):
             order_id = data['id']
             order = Order.objects.get(pk=order_id)
             order.delete()
-            return JsonResponse({'message': f'La orden ha sido eliminada {order_id}'})
+            return JsonResponse({'message': 'La orden ha sido eliminada'})
         except Order.DoesNotExist:
             return JsonResponse({'error': f'La orden con el ID {order_id} no existe'})
         except Exception as e:

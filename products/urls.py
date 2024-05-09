@@ -10,5 +10,5 @@ urlpatterns = [
     path('saveclient/', views.create_client, name='savecl'),
     path('saveorder/', views.create_order, name='saveor'),
     path('saveuser/', views.create_user, name='saveus'),
-    path('delete/', views.delete_order, name='login')
+    path('delete/', views.delete_order, name='delete')
 ]
