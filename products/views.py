@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Order, Client
+from .models import Product, Order, Client, User
 from django.http import JsonResponse
 from django.db.models import F 
 from django.views.decorators.csrf import csrf_exempt

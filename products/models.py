@@ -54,7 +54,7 @@ class User(models.Model):
     username = models.CharField(max_length=60, unique=True)
     password = models.CharField(max_length=60)
     email = models.CharField(max_length=25)
-    staff =models.CharField(default=False)
+    staff =models.CharField(max_length=10,default=False)
     
     def _str_(self):
         return self.username
