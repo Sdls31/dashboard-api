@@ -78,4 +78,21 @@ def create_order(request):
         return JsonResponse({'message': 'La orden ha sido creada'})
     else:
         return JsonResponse({'error': 'Solo se aceptan solicitudes POST'})
+
+
+@csrf_exempt
+def create_user(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data['username']
+        password = data['password']
+        email = data['email']
+        try:
+            user = User(username=username, password=password, email=email)
+            user.save()
+            return JsonResponse({'message': 'El User ha sido creado'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+    else:
+        return JsonResponse({'error': 'Solo se aceptan solicitudes POST'})
         
