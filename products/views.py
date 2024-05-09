@@ -69,15 +69,8 @@ def create_order(request):
         try:
             client = Client.objects.get(id=client_id)
             product = Product.objects.get(id=product_id)
-            return JsonResponse({'error': f'El cliente con el ID proporcionado existe {client.name} {product.name}'})
-        
         except Client.DoesNotExist:
             return JsonResponse({'error': f'El cliente con el ID proporcionado no existe {client_id}'})
-        try:
-            product = Product.objects.get(id=product_id)
-        except Product.DoesNotExist:
-            return JsonResponse({'error': 'El producto con el ID proporcionado no existe'})
-
         order = Order(client=client, products=product, quantity=quantity, details=details, address=address)
         order.save()
         return JsonResponse({'message': 'La orden ha sido creada'})
