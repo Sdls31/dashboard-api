@@ -94,8 +94,9 @@ def create_user(request):
         username = data['username']
         password = data['password']
         email = data['email']
+        staff = data['staff']
         try:
-            user = User(username=username, password=password, email=email)
+            user = User(username=username, password=password, email=email, staff=staff)
             user.save()
             return JsonResponse({'message': 'El User ha sido creado'})
         except Exception as e:
