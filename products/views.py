@@ -37,7 +37,7 @@ def login(request):
         data = json.loads(request.body)
         name = data['username']
         try:
-            user = User.objects.get(username=name)
+            user = User.objects.get(usernname=name)
             return  JsonResponse({'orders': user.staff})
         except: 
             return JsonResponse({'message', 'No existe ese usuario'})
@@ -120,7 +120,37 @@ def create_user(request):
         return JsonResponse({'error': 'Solo se aceptan solicitudes POST'})
     
 
-def check_User(request):
-    if request.method == 'POST':
-        data = json.loads()
+@csrf_exempt
+def update_order(request):
+    if request.method == 'PUT':
+        try:
+            data = json.loads(request.body)
+            order_id = data['id']
+            order = Order.objects.get(pk=order_id)
+            order.details = data['details']
+            order.address = data['address']
+            order.save()
+            return JsonResponse({'message': 'La orden ha sido actualizada'})
+        except Order.DoesNotExist:
+            return JsonResponse({'error': f'La orden con el ID {order_id} no existe'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+    else:
+        return JsonResponse({'error': 'Solo se aceptan solicitudes PUT'})
+
+@csrf_exempt
+def delete_order(request):
+    if request.method == 'DELETE':
+        try:
+            data = json.loads(request.body)
+            order_id = data['id']
+            order = Order.objects.get(pk=order_id)
+            order.delete()
+            return JsonResponse({'message': 'La orden ha sido eliminada'})
+        except Order.DoesNotExist:
+            return JsonResponse({'error': f'La orden con el ID {order_id} no existe'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+    else:
+        return JsonResponse({'error': 'Solo se aceptan solicitudes DELETE'})
         
