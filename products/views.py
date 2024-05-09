@@ -28,10 +28,11 @@ def list_clients(request):
 def create_product(request):
     if request.method == 'POST':
         try:
-            name = request.POST.get('name')
-            flavour = request.POST.get('flavour')
-            stock = request.POST.get('stock')
-            price = request.POST.get('price')
+            data = json.loads(request.body)
+            name = data['name']
+            flavour = data['flavour']
+            stock = data['stock']
+            price = data['price']
             product = Product(name=name, flavour=flavour, stock=stock, price=price)
             product.save()
             return JsonResponse({'message': 'El Producto se ha creado'})
@@ -43,11 +44,12 @@ def create_product(request):
 @csrf_exempt
 def create_client(request):
     if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data['name']
+        lastname = data['lastname']
+        email = data['email']
+        quantity_orders = data['quantity']
         try:
-            name = request.POST.get('name')
-            lastname = request.POST.get('lastname')
-            email = request.POST.get('email')
-            quantity_orders = request.POST.get('quantity')
             client = Client(name=name, lastname=lastname, email=email, quantity_orders=quantity_orders)
             client.save()
             return JsonResponse({'message': 'El Cliente ha sido creado'})
