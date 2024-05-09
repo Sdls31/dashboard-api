@@ -64,6 +64,8 @@ def create_order(request):
         quantity = request.POST.get('quantity') 
         details = request.POST.get('details') 
         address = request.POST.get('address')
+        print(client_id)
+        print(type(client_id))
         try:
             client = Client.objects.get(id=client_id)
         except Client.DoesNotExist:
