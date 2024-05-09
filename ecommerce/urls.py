@@ -23,4 +23,7 @@ urlpatterns = [
     path('', products_views.list_orders, name='orders'),
     path('products/', products_views.list_products, name='products'),
     path('clients/', products_views.list_clients, name='products'),
+    path('saveproduct/', products_views.create_product, name='savepr'),
+    path('saveclient/', products_views.create_client, name='savecl'),
+    path('saveorder/', products_views.create_order, name='saveor')
 ]

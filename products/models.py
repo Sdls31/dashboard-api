@@ -1,13 +1,13 @@
 from django.db import models
 
 
+
 # Create your models here.
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=60)
     lastname = models.CharField(max_length=60)
     email = models.CharField(max_length=25)
-    description = models.TextField()
     quantity_orders = models.IntegerField()
     
     def __str__(self):
@@ -45,6 +45,7 @@ class Order(models.Model):
 
     
     def __str__(self):
+        
         return str(self.id)
 
     
