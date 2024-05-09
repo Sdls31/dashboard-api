@@ -61,15 +61,15 @@ def create_client(request):
 def create_order(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        client_id = data.get('client_id')
-        product_id = data.get('product_id')
-        quantity = data.get('quantity') 
-        details = data.get('details') 
-        address = data.get('address')
+        client_id = data['client_id']
+        product_id = data['product_id']
+        quantity = data['quantity'] 
+        details = data['details']
+        address = data['address']
         try:
             client = Client.objects.get(id=client_id)
         except Client.DoesNotExist:
-            return JsonResponse({'error': f'El cliente con el ID proporcionado no existe {type(data)}'})
+            return JsonResponse({'error': f'El cliente con el ID proporcionado no existe {client_id}'})
         try:
             product = Product.objects.get(id=product_id)
         except Product.DoesNotExist:
