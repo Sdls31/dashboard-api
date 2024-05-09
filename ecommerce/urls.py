@@ -28,5 +28,6 @@ urlpatterns = [
     path('saveclient/', products_views.create_client, name='savecl'),
     path('saveorder/', products_views.create_order, name='saveor'),
     path('saveuser/', products_views.create_user, name='saveus'),
-    path('delete/', products_views.delete_order, name='delete')
+    path('delete/', products_views.delete_order, name='delete'),
+    path('update/', products_views.update_order, name='update')
 ]
