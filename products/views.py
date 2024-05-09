@@ -59,8 +59,8 @@ def create_client(request):
 @csrf_exempt
 def create_order(request):
     if request.method == 'POST':
-        client_id = request.POST.get('client_id')
-        product_id = request.POST.get('product_id') 
+        client_id = int(request.POST.get('client_id'))
+        product_id = int(request.POST.get('product_id'))
         quantity = request.POST.get('quantity') 
         details = request.POST.get('details') 
         address = request.POST.get('address')
