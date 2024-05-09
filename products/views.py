@@ -3,6 +3,7 @@ from .models import Product, Order, Client
 from django.http import JsonResponse
 from django.db.models import F 
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 
@@ -59,11 +60,12 @@ def create_client(request):
 @csrf_exempt
 def create_order(request):
     if request.method == 'POST':
-        client_id = request.POST.get('client_id')
-        product_id = request.POST.get('product_id')
-        quantity = request.POST.get('quantity') 
-        details = request.POST.get('details') 
-        address = request.POST.get('address')
+        data = json.loads(request.body)
+        client_id = data.get('client_id')
+        product_id = data.get('product_id')
+        quantity = data.get('quantity') 
+        details = data.get('details') 
+        address = data.get('address')
         try:
             client = Client.objects.get(id=client_id)
         except Client.DoesNotExist:
