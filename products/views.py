@@ -142,7 +142,7 @@ def update_order(request):
 def delete_order(request):
     if request.method == 'DELETE':
         try:
-            data = json.loads(request.body)
+            data = json.loads(request.params)
             order_id = data['id']
             order = Order.objects.get(pk=order_id)
             order.delete()
