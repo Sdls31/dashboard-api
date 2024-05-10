@@ -122,7 +122,7 @@ def create_user(request):
 
 @csrf_exempt
 def update_order(request):
-    if request.method == 'PUT':
+    if request.method == 'PATCH':
         try:
             data = json.loads(request.body)
             order_id = data['id']
