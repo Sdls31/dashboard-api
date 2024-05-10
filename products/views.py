@@ -153,4 +153,22 @@ def delete_order(request):
             return JsonResponse({'error': str(e)})
     else:
         return JsonResponse({'error': 'Solo se aceptan solicitudes DELETE'})
+    
+@csrf_exempt
+def valid_user(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data['username']
+        password = data['password']
+        try:
+            user = User.objects.get(username=username)
+            if password == user.password:
+                data = user.staff
+                return JsonResponse({'message': f'{data}'})
+            else:
+                return JsonResponse({'error': 'Contraseña Incorrecta'})
+        except Exception as e:
+            return JsonResponse({'error': 'No existe ese Usuario, prueba con otro'})
+    else:
+        return JsonResponse({'error': 'Solo se aceptan solicitudes POST'})
         
