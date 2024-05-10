@@ -5,6 +5,7 @@ from django.db import models
 # Create your models here.
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=25, default="")
     name = models.CharField(max_length=60)
     lastname = models.CharField(max_length=60)
     email = models.CharField(max_length=25)

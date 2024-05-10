@@ -12,5 +12,7 @@ urlpatterns = [
     path('saveuser/', views.create_user, name='saveus'),
     path('delete/', views.delete_order, name='delete'),
     path('update/', views.update_order, name='update'),
-    path('login/', views.valid_user, name='validateus')
+    path('login/', views.valid_user, name='validateus'),
+    
+
 ]

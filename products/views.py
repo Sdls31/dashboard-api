@@ -31,19 +31,7 @@ def list_users(request):
     # client_name = Client.objects.get(pk = data.client_id)
     return  JsonResponse({'orders': list(users.values())})
 
-@csrf_exempt
-def login(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        name = data['username']
-        try:
-            user = User.objects.get(usernname=name)
-            return  JsonResponse({'orders': user.staff})
-        except: 
-            return JsonResponse({'message', 'No existe ese usuario'})
-    # orders = Order.objects.all()
-    # data = Order.objects.get(pk=1)
-    # client_name = Client.objects.get(pk = data.client_id)
+
 
 
 @csrf_exempt
@@ -67,13 +55,16 @@ def create_product(request):
 def create_client(request):
     if request.method == 'POST':
         data = json.loads(request.body)
+        username = data['username']
         name = data['name']
         lastname = data['lastname']
         email = data['email']
         quantity_orders = data['quantity']
         try:
             client = Client(name=name, lastname=lastname, email=email, quantity_orders=quantity_orders)
-            client.save()
+            user = User.objects.get(username=username)
+            if username == user.username:
+                client.save()
             return JsonResponse({'message': 'El Cliente ha sido creado'})
         except Exception as e:
             return JsonResponse({'error': str(e)})
