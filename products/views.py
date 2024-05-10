@@ -61,7 +61,7 @@ def create_client(request):
         email = data['email']
         quantity_orders = data['quantity']
         try:
-            client = Client(name=name, lastname=lastname, email=email, quantity_orders=quantity_orders)
+            client = Client(username=username,name=name, lastname=lastname, email=email, quantity_orders=quantity_orders)
             user = User.objects.get(username=username)
             if username == user.username:
                 client.save()
