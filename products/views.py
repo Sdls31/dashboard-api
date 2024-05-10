@@ -55,16 +55,13 @@ def create_product(request):
 def create_client(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        username = data['username']
         name = data['name']
         lastname = data['lastname']
         email = data['email']
         quantity_orders = data['quantity']
         try:
-            client = Client(username=username,name=name, lastname=lastname, email=email, quantity_orders=quantity_orders)
-            user = User.objects.get(username=username)
-            if username == user.username:
-                client.save()
+            client = Client(name=name, lastname=lastname, email=email, quantity_orders=quantity_orders)
+            client.save()
             return JsonResponse({'message': 'El Cliente ha sido creado'})
         except Exception as e:
             return JsonResponse({'error': str(e)})
